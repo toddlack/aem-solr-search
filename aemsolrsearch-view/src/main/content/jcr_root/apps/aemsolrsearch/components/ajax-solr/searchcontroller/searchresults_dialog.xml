@@ -24,14 +24,20 @@
             defaultValue="result"
             xtype="textfield"
             />
-
     <results-target
             jcr:primaryType="cq:Widget"
             fieldLabel="HTML Target"
             name="./results-target"
             defaultValue="#searchresults"
             xtype="textfield"
-            />
+    />
+    <results-content-field
+            jcr:primaryType="cq:Widget"
+            fieldLabel="SOLR field to display as result text"
+            name="./results-content-field"
+            defaultValue="content"
+            xtype="textfield"
+    />
     <available-fields
             jcr:primaryType="cq:Widget"
             fieldLabel="Available Result Fields"
@@ -39,5 +45,5 @@
             type="checkbox"
             optionsProvider="CQSearch.controller.provideStoredFieldsOptions"
             xtype="selection"
-            />
+    />
 </jcr:root>

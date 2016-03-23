@@ -55,26 +55,32 @@
 
       template: function (doc) {
         var snippet = '';
+        var teaserField = '${resultsContentField}';
+        var titleField = 'title';
+        var idField = 'id';
 
-        if( typeof doc.teaser != 'undefined') {
-            if(doc.teaser.length > 250)
+        var teaserVal= doc[teaserField];
+        var idVal = doc[idField];
+
+        if( typeof teaserVal != 'undefined') {
+            if(teaserVal.length > 250)
             {
-                snippet += doc.teaser.substring(0, 250);
-                snippet += '<span style="display:none">' + doc.teaser.substring(250);
+                snippet += teaserVal.trim().substring(0, 250);
+                snippet += '<span style="display:none">' + teaserVal.substring(250);
                 snippet += '</span> <a href="#" class="more">more</a>';
             }
             else
             {
-                snippet += doc.teaser;
+                snippet += teaserVal.trim();
             }
         }
 
-        var title = doc.title;
+        var title = doc[titleField];
         var output = '';
 
-        if(this.manager.response.highlighting && this.manager.response.highlighting[doc.id]) {
-            if(this.manager.response.highlighting[doc.id]['teaser']) {
-                var teaserSnippet = this.manager.response.highlighting[doc.id]['teaser'][0];
+        if(this.manager.response.highlighting && this.manager.response.highlighting[idVal]) {
+            if(this.manager.response.highlighting[idVal][teaserField]) {
+                var teaserSnippet = this.manager.response.highlighting[idVal][teaserField][0];
 
                 if (teaserSnippet.length > 250) {
                     snippet = teaserSnippet.substring(0, 250);
@@ -87,8 +93,8 @@
         }
 
         output += '<div class="result-card">';
-        output += '<a href="' + doc.id + '" class="google-title">' + title + '</a>';
-        output += '<div class="google-url">' + doc.id + '</div>';
+        output += '<a href="' + idVal + '" class="google-title">' + title + '</a>';
+        output += '<div class="google-url">' + idVal + '</div>';
         output += '<div>' + snippet + '</div></div>';
 
 
