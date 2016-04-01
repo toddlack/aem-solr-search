@@ -32,6 +32,13 @@
             defaultValue="#searchresults"
             xtype="textfield"
             />
+    <results-content-field
+            jcr:primaryType="cq:Widget"
+            fieldLabel="SOLR field to display as result text"
+            name="./results-content-field"
+            defaultValue="teaser"
+            xtype="textfield"
+    />
     <available-fields
             jcr:primaryType="cq:Widget"
             fieldLabel="Available Result Fields"
