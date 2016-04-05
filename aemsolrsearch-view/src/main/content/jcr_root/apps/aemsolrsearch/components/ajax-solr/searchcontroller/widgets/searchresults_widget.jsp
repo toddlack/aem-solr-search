@@ -57,9 +57,11 @@
     <%--console.dir(doc);--%>
         var snippet = '';
         var teaserField = '${resultsContentField}';
-        var titleField = 'title';
+        var titleField = '${resultsTitleField}';
         var idField = 'id';
+        var postContentField='${resultsPostContentField}';
 
+        var postContentVal=doc[postContentField];
         var teaserVal= doc[teaserField];
         var idVal = doc[idField];
         if( typeof teaserVal != 'undefined') {
@@ -99,7 +101,11 @@
         output += '<div class="result-card">';
         output += '<a href="' + idVal + '" class="google-title">' + title + '</a>';
         output += '<div class="google-url">' + idVal + '</div>';
-        output += '<div>' + snippet + '</div></div>';
+        output += '<div class="result-text">' + snippet + '</div>';
+        if (typeof postContentVal != 'undefined' ) {
+            output += '<div class="result-post-text">'+ postContentVal +'</div>';
+        }
+        output += '</div>';
 
 
         return output;
