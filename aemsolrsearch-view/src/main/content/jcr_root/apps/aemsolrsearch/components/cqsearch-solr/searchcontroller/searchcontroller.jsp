@@ -1,15 +1,25 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/apps/aemsolrsearch/components/global.jspx"%>
 <%@ taglib prefix="cqsearch" uri="http://aemsolrsearch.headwire.com/taglibs/aemsolrsearch-taglib"%>
+<%@ page import="com.day.cq.wcm.api.AuthoringUIMode" %>
+
 
 <%-- This will provides the configs from the dialog as request attributes--%>
 <cqsearch:solrController />
+
 
 <%-- This allows to branch login on author mode --%>
 <cqsearch:wcmMode />
 
 <%-- This allows to use author ui mode --%>
-<cqsearch:authoringUIMode />
+<%
+    boolean classicMode = AuthoringUIMode.fromRequest(request) == AuthoringUIMode.CLASSIC;
+    boolean touchMode = AuthoringUIMode.fromRequest(request) == AuthoringUIMode.TOUCH;
+
+    pageContext.setAttribute("touchMode", touchMode);
+    pageContext.setAttribute("classicMode", classicMode);
+%>
+<%--cqsearch:authoringUIMode /> --%>
 
 <cqsearch:solrSearch
         var="solrSearch"
