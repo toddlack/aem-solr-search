@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
-    jcr:primaryType="sling:OsgiConfig"
-    solr.protocol="http"
-    solr.server.name="localhost"
-    solr.server.port="8888"
-    solr.context.path="/solr"
-    solr.proxy.enabled="true"
-    solr.proxy.url="http://localhost:4503/apps/solr/proxy"
-    solr.proxy.allowed.handlers="[/select,/geometrixx-media-search]"
-    />
+          jcr:primaryType="sling:OsgiConfig"
+          solr.protocol="http"
+          solr.server.name="localhost"
+          solr.server.port="8888"
+          solr.context.path="/solr"
+          solr.proxy.enabled="false"
+          solr.proxy.url="http://localhost:4502/apps/solr/proxy"
+          solr.proxy.allowed.handlers="[/select,/browse]"
+          solr.zkhost="fusionextstage.exnet.sas.com:2181"
+          solr.mode="SolrCloud"
+          solr.master="http://fusionextstage.exnet.sas.com:8983/solr"
+/>

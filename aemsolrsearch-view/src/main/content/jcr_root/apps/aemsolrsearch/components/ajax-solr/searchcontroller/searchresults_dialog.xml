@@ -32,6 +32,34 @@
             defaultValue="#searchresults"
             xtype="textfield"
             />
+    <results-title-field
+            jcr:primaryType="cq:Widget"
+            fieldLabel="SOLR field to display as a Title"
+            name="./results-title-field"
+            defaultValue="title"
+            type="select"
+            optionsProvider="CQSearch.controller.provideStoredFieldsOptions"
+            xtype="selection"
+    />
+    <results-content-field
+            jcr:primaryType="cq:Widget"
+            fieldLabel="SOLR field to display as result text"
+            name="./results-content-field"
+            defaultValue="teaser"
+            type="select"
+            optionsProvider="CQSearch.controller.provideStoredFieldsOptions"
+            xtype="selection"
+    />
+    <results-post-content-field
+            jcr:primaryType="cq:Widget"
+            fieldLabel="SOLR field to display to the right of results, such as a date"
+            name="./results-post-content-field"
+            defaultValue="last_modified"
+            type="select"
+            optionsProvider="CQSearch.controller.provideStoredFieldsOptions"
+            xtype="selection"
+    />
+
     <available-fields
             jcr:primaryType="cq:Widget"
             fieldLabel="Available Result Fields"

@@ -54,27 +54,45 @@
       },
 
       template: function (doc) {
-        var snippet = '';
 
-        if( typeof doc.teaser != 'undefined') {
-            if(doc.teaser.length > 250)
+        var snippet = '';
+        var teaserField = '${resultsContentField}';
+        var titleField = '${resultsTitleField}';
+        var idField = 'id';
+        var postContentField='${resultsPostContentField}';
+
+        var postContentVal=doc[postContentField];
+        var teaserVal= doc[teaserField];
+        var idVal = doc[idField];
+        if( typeof teaserVal != 'undefined') {
+            var displayVal=teaserVal;
+            if (Array.isArray(teaserVal)) {
+                displayVal=teaserVal[0];
+            }
+            if(displayVal.length > 250)
             {
-                snippet += doc.teaser.substring(0, 250);
-                snippet += '<span style="display:none">' + doc.teaser.substring(250);
+                snippet += displayVal.trim().substring(0, 250);
+                snippet += '<span style="display:none">' + displayVal.substring(250);
                 snippet += '</span> <a href="#" class="more">more</a>';
             }
             else
             {
-                snippet += doc.teaser;
+                if (typeof displayVal === "string") {
+                    snippet += displayVal.trim();
+                } else {
+                    snippet += displayVal;
+                }
             }
         }
 
-        var title = doc.title;
+        var title = doc[titleField];
         var output = '';
 
-        if(this.manager.response.highlighting && this.manager.response.highlighting[doc.id]) {
-            if(this.manager.response.highlighting[doc.id]['teaser']) {
-                var teaserSnippet = this.manager.response.highlighting[doc.id]['teaser'][0];
+        var highlights = this.manager.response.highlighting;
+        if(highlights && highlights[idVal]) {
+
+            if(highlights[idVal][teaserField]) {
+                var teaserSnippet = highlights[idVal][teaserField][0];
 
                 if (teaserSnippet.length > 250) {
                     snippet = teaserSnippet.substring(0, 250);
@@ -87,9 +105,13 @@
         }
 
         output += '<div class="result-card">';
-        output += '<a href="' + doc.id + '" class="google-title">' + title + '</a>';
-        output += '<div class="google-url">' + doc.id + '</div>';
-        output += '<div>' + snippet + '</div></div>';
+        output += '<a href="' + idVal + '" class="result-title">' + title + '</a>';
+        output += '<div class="result-url">' + idVal + '</div>';
+        output += '<div class="result-text">' + snippet + '</div>';
+        if (typeof postContentVal != 'undefined' ) {
+            output += '<div class="result-post-text">'+ postContentVal +'</div>';
+        }
+        output += '</div>';
 
 
         return output;

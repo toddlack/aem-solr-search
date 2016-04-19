@@ -54,6 +54,12 @@ public class SolrControllerTag extends CqSimpleTagSupport {
     public static final String PROPERTY_RESULTS_HTML_TARGET = "results-target";
     /** JCR property holding available result fields. */
     public static final String PROPERTY_RESULTS_AVAILABLE_FIELDS = "solr-result-fields";
+    /** JCR property that specifies which fields to concatenate as the 'teaser' field for display */
+    public static final String PROPERTY_RESULTS_CONTENT_FIELDS = "solr-result-content-fields";
+    /** JCR property that specifies which field to display as the content. Only one field. */
+    public static final String PROPERTY_RESULTS_TITLE = "results-title-field";
+    public static final String PROPERTY_RESULTS_POST_CONTENT= "results-post-content-field";
+    public static final String PROPERTY_RESULTS_CONTENT = "results-content-field";
 
     /** JCR property holding no results enabled state. */
     public static final String PROPERTY_NO_RESULTS_ENABLE = "no-results-enable";
@@ -147,7 +153,12 @@ public class SolrControllerTag extends CqSimpleTagSupport {
     public static final String JSP_ATTR_RESULTS_HTML_TARGET = "resultsTarget";
     /** JSP attribute name holding the available result field. */
     public static final String JSP_ATTR_RESULTS_AVAILABLE_FILEDS = "resultsAvailableFields";
-
+    /** JSP attribute name to hold the fields to be concatenated into the 'teaser' field - single value*/
+    public static final String JSP_ATTR_RESULTS_CONTENT_FIELD =  "resultsContentField";
+    /** Result field to show as the Title of each result */
+    public static final String JSP_ATTR_RESULTS_TITLE_FIELD =  "resultsTitleField";
+    /** Result to show next to contents, such as a date */
+    public static final String JSP_ATTR_RESULTS_POST_CONTENT_FIELD =  "resultsPostContentField";
     /** JSP attribute name holding the state variable for no results. If <code>true</code>
      *  results are enabled, otherwise it is not. */
     public static final String JSP_ATTR_NO_RESULTS_ENABLED = "noResultsEnabled";
@@ -240,6 +251,9 @@ public class SolrControllerTag extends CqSimpleTagSupport {
         getRequest().setAttribute(JSP_ATTR_RESULTS_PER_PAGE, getProperty(PROPERTY_RESULTS_PER_PAGE, "10"));
         getRequest().setAttribute(JSP_ATTR_RESULTS_HTML_ID,  getProperty(PROPERTY_RESULTS_HTML_ID, "docs"));
         getRequest().setAttribute(JSP_ATTR_RESULTS_HTML_TARGET,  getProperty(PROPERTY_RESULTS_HTML_TARGET, "#search"));
+        getRequest().setAttribute(JSP_ATTR_RESULTS_CONTENT_FIELD,  getProperty(PROPERTY_RESULTS_CONTENT, "teaser"));
+        getRequest().setAttribute(JSP_ATTR_RESULTS_POST_CONTENT_FIELD,  getProperty(PROPERTY_RESULTS_POST_CONTENT, "last_modified"));
+        getRequest().setAttribute(JSP_ATTR_RESULTS_TITLE_FIELD,  getProperty(PROPERTY_RESULTS_TITLE, "title"));
         getRequest().setAttribute(JSP_ATTR_RESULTS_AVAILABLE_FILEDS,  getProperty(PROPERTY_RESULTS_AVAILABLE_FIELDS, new String[]{}));
 
         // No Results
